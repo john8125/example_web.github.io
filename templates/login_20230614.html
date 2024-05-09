@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>登录页面</title>
+</head>
+<body>
+  <form id="loginForm">
+    <label for="username">用户名:</label>
+    <input type="text" id="username" name="username"><br><br>
+    
+    <label for="password">密码:</label>
+    <input type="password" id="password" name="password"><br><br>
+    
+    <input type="submit" value="登录">
+  </form>
+  <div></div>
+  <a href="https://sasaiot1.vghtpe.gov.tw">VIYA</a>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+  <script>
+    // 获取登录表单元素
+    var loginForm = document.getElementById('loginForm');
+
+    // 监听登录表单的提交事件
+    loginForm.addEventListener('submit', function(event) {
+      event.preventDefault(); // 阻止表单的默认提交行为
+
+      // 获取用户名和密码
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+
+      // 设置 Cookie
+      document.cookie = "username=" + encodeURIComponent(username);
+      document.cookie = "password=" + encodeURIComponent(password);
+      // 在網域 A 上設置 cookie
+      document.cookie = "TEST=cookieValue;domain=.www.test.com;path=/";
+      
+    function parseCookie() {
+        var cookieObj = {};
+        var cookieAry = document.cookie.split(';');
+        var cookie;
+
+        for (var i=0, l=cookieAry.length; i<l; ++i) {
+            cookie = jQuery.trim(cookieAry[i]);
+            cookie = cookie.split('=');
+            cookieObj[cookie[0]] = cookie[1];
+        }
+
+        return cookieObj;
+    }
+
+
+    function getCookieByName(name) {
+        var value = parseCookie()[name];
+        if (value) {
+            value = decodeURIComponent(value);
+        }
+
+        return value;
+    }
+
+
+      var cookie = document.cookie;
+      console.log(cookie);
+
+      // 执行登录逻辑，例如发送登录请求等
+      // ...
+
+      // 重定向到其他页面
+      window.location.href = "http://localhost:8005" /*?id="+ getCookieByName("username") + "&token="+getCookieByName("password");*/
+      /*window.location.href = "http://localhost:8000/content";*/
+      /*window.location.href = "https://sasaiot1.vghtpe.gov.tw:8001/sso?id="+ getCookieByName("username") + "&token="+getCookieByName("password");*/
+    });
+  </script>
+</body>
+</html>
