@@ -9,7 +9,7 @@ def index():
 
 @app.route("/login_1")
 def index_1():
-    return render_template("login_20230614.html")
+    return render_template("/templates/login_20230614.html")
 
 @app.route("/content")
 def index_2():
